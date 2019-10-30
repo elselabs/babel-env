@@ -7,14 +7,16 @@ module.exports = babel => {
     visitor: {
       ImportDeclaration: (path, state) => {
         const { opts } = state;
-        const replacedModuleName = opts.replacedModuleName || 'babel-env';
-        if (path.node.source.value === replacedModuleName) {
-          const babelEnv = process.env.BABEL_ENV;
+        const moduleName = opts.moduleName || 'babel-env';
+        if (path.node.source.value === moduleName) {
+          const { environmentVariable } = opts;
+          const env = environmentVariable
+            ? process.env[environmentVariable]
+            : process.env.BABEL_ENV;
           const directory = opts.directory || process.cwd();
           const fileFormat = opts.fileFormat || '.env';
 
-          const fullPath = `${directory}/${fileFormat}${babelEnv &&
-            `.${babelEnv}`}`;
+          const fullPath = `${directory}/${fileFormat}${env && `.${env}`}`;
 
           const envFile = dotenv.config({
             path: fullPath
