@@ -1,6 +1,6 @@
 {
   "name": "@elselabs/babel-env",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A flexible Babel plugin that loads environment variables for multiple environments",
   "main": "src/index.js",
   "scripts": {
