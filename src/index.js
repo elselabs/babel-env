@@ -9,14 +9,23 @@ module.exports = babel => {
         const { opts } = state;
         const moduleName = opts.moduleName || 'babel-env';
         if (path.node.source.value === moduleName) {
+          // get environment variable from options or default to BABEL_ENV
           const { environmentVariable } = opts;
-          const env = environmentVariable
+          const environment = environmentVariable
             ? process.env[environmentVariable]
             : process.env.BABEL_ENV;
-          const directory = opts.directory || process.cwd();
-          const fileFormat = opts.fileFormat || '.env';
 
-          const fullPath = `${directory}/${fileFormat}${env && `.${env}`}`;
+          // get directory from options or default to current working directory
+          const directory = opts.directory || process.cwd();
+
+          // get file format or default to .env
+          let fileName = opts.fileFormat || '.env';
+          // if there is an environment then append the file name
+          if (environment) {
+            fileName = fileName.concat(`.${environment}`);
+          }
+
+          const fullPath = `${directory}/${fileName}`;
 
           const envFile = dotenv.config({
             path: fullPath
