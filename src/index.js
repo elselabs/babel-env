@@ -7,7 +7,7 @@ module.exports = babel => {
     visitor: {
       ImportDeclaration: (path, state) => {
         const { opts } = state;
-        const moduleName = opts.moduleName || 'babel-env';
+        const moduleName = opts.moduleName || '@elselabs/babel-env';
         if (path.node.source.value === moduleName) {
           // get environment variable from options or default to BABEL_ENV
           const { environmentVariable } = opts;

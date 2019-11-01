@@ -3,9 +3,9 @@ A flexible Babel plugin that loads environment variables for multiple environmen
 
 # Installation
 ```
-npm i --save-dev @elselabs/babel-env
+npm i @elselabs/babel-env
 ```
-Add `babel-env` to the plugins list inside `.babelrc` **or** `babel.config.js`, depending on which config used by your project. ([Babel configuration docs link](https://babeljs.io/docs/en/config-files))
+Add `@elselabs/babel-env` to the plugins list inside `.babelrc` **or** `babel.config.js`, depending on which config used by your project. ([Babel configuration docs link](https://babeljs.io/docs/en/config-files))
 ```
 // .babelrc
 {
@@ -26,12 +26,12 @@ API_KEY=ipsum
 ```
 And allows you to import these variables in your JS.
 ```
-import { API_KEY } from 'babel-env';
+import { API_KEY } from '@elselabs/babel-env';
 console.log(API_KEY)
 
 // or 
 
-import config from 'babel-env';
+import config from '@elselabs/babel-env';
 console.log(config.API_KEY)
 ```
 ### Handling different environments
@@ -45,7 +45,7 @@ The **environment variable**, **file format**, **file directory** and **import m
 
 You may want to override the environment variable used to determine which environment your compiling. In some cases like `react-native-cli`, it uses `BABEL_ENV` and sets it to either `development` or `production`. As a result, its difficult to compile for another environments like `staging`, `test`, etc. Alternatively, you can create a custom environment variable and have it use that instead.
 
-- `moduleName` - By default the import name is `babel-env`.
+- `moduleName` - By default the import name is `@elselabs/babel-env`.
 - `directory` - By default uses the root project folder. 
 - `fileFormat` - By default uses `.env`.
 
